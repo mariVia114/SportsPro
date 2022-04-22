@@ -1,0 +1,53 @@
+﻿@using SportsPro.Models.RegistrationViewModels
+@model RegistrationViewModel
+@{
+    ViewData["Title"] = "Registrations";
+}
+
+<h1>Customer: @ViewBag.CustomerName</h1>
+<h1>Registrations</h1>
+@if (Model.Registrations.Count() > 0)
+{
+    <table class="table table-stripped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Product
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Registrations)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" asp-route-customerId=@item.CustomerId asp-route-productId=@item.ProductId  asp-action="Delete">Delete</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <p>No Registrations found</p>
+}
+<h3>Product</h3>
+<form action="~/registrations/add" method="post" >
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group" style="margin-bottom: 15px">
+        @Html.DropDownListFor(model => model.ProductId, Model.Products, "Select a product", new {@class = "form-control"} )
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </div>
+</form>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+

@@ -1,0 +1,217 @@
+﻿@model SportsPro.Models.IncidentModels.IncidentViewModel
+
+@{
+    ViewData["Title"] = "Incident Manager";
+}
+
+<h1>Incident Manager</h1>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="all-incidents-tab" data-bs-toggle="tab" data-bs-target="#all-incidents" type="button" role="tab" aria-controls="all-incidents" aria-selected="true">All incidents</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="unassigned-incidents-tab" data-bs-toggle="tab" data-bs-target="#unassigned-incidents" type="button" role="tab" aria-controls="unassigned-incidents" aria-selected="false">Unassigned incidents</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="open-incidents-tab" data-bs-toggle="tab" data-bs-target="#open-incidents" type="button" role="tab" aria-controls="open-incidents" aria-selected="false">Open incidents</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="all-incidents" role="tabpanel" aria-labelledby="all-incidents-tab">
+      <table class="table table-stripped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Technician)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.DateOpened)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.DateClosed)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.IncidentList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Technician.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOpened)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateClosed)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IncidentId">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IncidentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+      </div>
+  <div class="tab-pane fade" id="unassigned-incidents" role="tabpanel" aria-labelledby="unassigned-incidents-tab">
+      <table class="table table-stripped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Technician)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.DateOpened)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.DateClosed)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.IncidentList.ToList().Where(inc => inc.Technician == null)) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Technician.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOpened)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateClosed)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IncidentId">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IncidentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+      </div>
+  <div class="tab-pane fade" id="open-incidents" role="tabpanel" aria-labelledby="open-incidents-tab">
+      <table class="table table-stripped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.Technician)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.DateOpened)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Incident.DateClosed)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.IncidentList.ToList().Where(inc => inc.DateClosed == null)) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Technician.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOpened)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateClosed)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IncidentId">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IncidentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+      </div>
+</div>
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Add Incident</a>
+</p>

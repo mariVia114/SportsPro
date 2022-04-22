@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <h2>SportsPro Technical Support</h2>
+    <h5>Sports management software for the sports enthusiast</h5>
+    
+    <h2>Admin</h2>
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                <a class="nav-link" asp-controller="Products" asp-action="Index">Manage Products</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="nav-link" asp-controller="Technicians" asp-action="Index">Manage Technicians</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="nav-link" asp-controller="Customers" asp-action="Index">Manage Customers</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="nav-link" asp-controller="Incidents" asp-action="Index">Manage Incidents</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="nav-link"   asp-controller="Registrations" asp-action="Registrations">Manage Registrations</a>
+            </td>
+        </tr>
+    </table>
+    
+    <h2>Technician</h2>
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                <a class="nav-link" asp-controller="TechIncident" asp-action="get">Update Incident</a>
+            </td>
+        </tr>
+    </table>
+
+</div>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SportsPro.Dtos.IncidentDto>
+
+@{
+    ViewData["Title"] = "Incidents by Technician";
+}
+
+<h1>Technician: @ViewBag.TechnicianName</h1>
+<h1>Assigned Open Incidents</h1>
+
+
+<table class="table table-stripped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </th>
+            <th> @Html.DisplayNameFor(model => model.DateOpened)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+             <td>
+                @item.DateOpened.ToShortDateString()
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Update" asp-route-id="@item.IncidentId">Edit</a>
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-primary" asp-action="Techinicians">Switch Technician</a>
+</p>
